@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextHub.Mono | HomePages</title>
+    
+    <!-- ファビコン設定 -->
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/280326545?v=4" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/280326545?v=4">
+    
+    <style>
+        :root[data-theme="light"] {
+            --bg-color: #f0f2f5;
+            --text-main: #1d1d1f;
+            --text-sub: #6e6e73;
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --accent: #333333;
+            --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-color: #0a0a0a;
+            --text-main: #ffffff;
+            --text-sub: #a1a1a6;
+            --glass-bg: rgba(20, 20, 20, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent: #ffffff;
+            --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        :root[data-theme="main"] {
+            --bg-color: #1a1a1a;
+            --text-main: #e0e0e0;
+            --text-sub: #888888;
+            --glass-bg: rgba(40, 40, 40, 0.7);
+            --glass-border: rgba(100, 100, 100, 0.2);
+            --accent: #cccccc;
+            --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            font-family: 'Inter', -apple-system, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* 見出しフォント設定 */
+        h1, h2 {
+            font-family: "Lora", "HG Mincho B", "游明朝", serif;
+            letter-spacing: 0.05em;
+        }
+
+        /* ガラス質感の共通定義 */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+        }
+
+        /* ヘッダー */
+        header {
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            position: fixed;
+            width: 94%;
+            top: 15px;
+            left: 3%;
+            z-index: 1000;
+            border-radius: 20px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .img-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-family: "Outfit", sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        nav a:hover { opacity: 1; }
+
+        /* テーマスイッチャー */
+        .theme-switcher {
+            display: flex;
+            gap: 6px;
+            padding: 4px;
+            background: rgba(128,128,128,0.1);
+            border-radius: 30px;
+        }
+
+        .theme-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ヒーローエリア */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at 70% 20%, rgba(128,128,128,0.05), transparent);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            margin-bottom: 15px;
+            background: linear-gradient(to bottom, var(--text-main), var(--text-sub));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* コンテンツエリア */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px 100px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            padding: 40px;
+            text-align: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card h3 {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card-meta {
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* フッター */
+        footer {
+            padding: 80px 5%;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-logo {
+            font-family: "Outfit", sans-serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: block;
+            opacity: 0.8;
+        }
+
+        /* アニメーション用クラス */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: reveal 0.8s ease forwards;
+        }
+
+        @keyframes reveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: row; /* 横並び維持 */
+                width: 90%;
+                left: 5%;
+                padding: 0 15px;
+            }
+            nav a { display: none; } /* スマホではリンクを隠す（スイッチャーのみ表示） */
+            .section { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body data-theme="main">
+
+    <header class="glass">
+        <div class="header-left">
+            <img src="https://avatars.githubusercontent.com/u/280326545?v=4" alt="Logo" class="img-logo">
+            <a href="#" class="logo">NextHub.Mono</a>
+        </div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#members">Members</a>
+            <div class="theme-switcher">
+                <button class="theme-btn" onclick="setTheme('light')" title="Light" style="background:#fff; color:#000">L</button>
+                <button class="theme-btn" onclick="setTheme('dark')" title="Dark" style="background:#333; color:#fff">D</button>
+                <button class="theme-btn" onclick="setTheme('main')" title="Main" style="background:#666; color:#fff">M</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1 class="reveal">NextHub.Mono</h1>
+            <p class="reveal" style="animation-delay: 0.2s; color: var(--text-sub);">ウェブ開発をメインとしたクリエイティブ・グループ</p>
+        </section>
+
+        <div class="container">
+            <section id="about" class="section glass reveal" style="animation-delay: 0.4s;">
+                <h2>About Project</h2>
+                <p style="max-width: 600px; margin: 0 auto; opacity: 0.9;">
+                    NextHub.Monoはウェブ開発をメインとした活動を行っています。<br>
+                    ミニマリズムに基づいた設計と、モダンなユーザーインターフェースを追求しています。
+                </p>
+            </section>
+
+            <section id="members">
+                <h2 class="reveal" style="animation-delay: 0.5s;">Members</h2>
+                <div class="grid">
+                    <div class="card glass reveal" style="animation-delay: 0.6s;">
+                        <h3>Mikancat10</h3>
+                        <span class="card-meta">Founder & Administrator</span>
+                        <p style="border-top: 1px solid var(--glass-border); padding-top: 15px; font-size: 0.9rem;">
+                            NextHub.Monoの創設者。プロジェクト全体の統括を担当。
+                        </p>
+                    </div>
+                    <div class="card glass reveal" style="animation-delay: 0.7s;">
+                        <h3>Mikancat1045</h3>
+                        <span class="card-meta">Sub Account</span>
+                        <p style="border-top: 1px solid var(--glass-border); padding-top: 15px; font-size: 0.9rem;">
+                            Mikancat10のサブアカウント。開発・運用テストをサポート。
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <span class="footer-logo">NextHub.Mono</span>
+        <p style="opacity: 0.5; font-size: 0.75rem;">&copy; 2026 NextHub.Mono Project. <br>Minimalism & Glassmorphism Design.</p>
+    </footer>
+
+    <script>
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'main';
+        setTheme(savedTheme);
+    </script>
+</body>
+</html>
